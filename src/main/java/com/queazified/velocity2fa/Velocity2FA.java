@@ -3,6 +3,7 @@ import java.util.Map;
 
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
+import com.velocitypowered.api.event.command.CommandExecuteEvent;
 import com.velocitypowered.api.event.connection.PostLoginEvent;
 import com.velocitypowered.api.event.player.ServerPreConnectEvent;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
@@ -118,6 +119,42 @@ public class Velocity2FA {
         } catch (Exception e) {
             logger.error("Error in ServerPreConnect event for player {}: {}", player.getUsername(), e.getMessage(), e);
             // Don't block the connection if there's an error in our plugin
+        }
+    }
+
+    @Subscribe
+    public void onCommandExecute(CommandExecuteEvent event) {
+        if (!(event.getCommandSource() instanceof Player)) {
+            return;
+        }
+
+        Player player = (Player) event.getCommandSource();
+        
+        try {
+            boolean isStaff = hasStaffPermission(player);
+            boolean has2FA = twoFactorManager.hasSecretKey(player.getUniqueId());
+            boolean isAuthenticated = authenticatedPlayers.containsKey(player.getUsername());
+
+            // If staff, has 2FA, and not authenticated, block commands except /2fa
+            if (isStaff && has2FA && !isAuthenticated) {
+                String command = event.getCommand().toLowerCase();
+                
+                // Allow only /2fa commands for authentication
+                if (!command.startsWith("2fa")) {
+                    event.setResult(CommandExecuteEvent.CommandResult.denied());
+                    try {
+                        player.sendMessage(Component.text("You must authenticate with 2FA first! Use /2fa <code>")
+                            .color(NamedTextColor.RED));
+                        player.sendMessage(Component.text("Commands are blocked until you complete 2FA authentication.")
+                            .color(NamedTextColor.YELLOW));
+                    } catch (Exception msgEx) {
+                        logger.warn("Failed to send 2FA command block message to player {}: {}", player.getUsername(), msgEx.getMessage());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Error in CommandExecute event for player {}: {}", player.getUsername(), e.getMessage(), e);
+            // Don't block the command if there's an error in our plugin
         }
     }
 
