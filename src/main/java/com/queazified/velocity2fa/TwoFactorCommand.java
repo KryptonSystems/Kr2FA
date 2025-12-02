@@ -118,13 +118,22 @@ public class TwoFactorCommand implements SimpleCommand {
                 player.sendMessage(Component.text("Secret Key: " + secretKey)
                     .color(NamedTextColor.GREEN));
 
-                // Send a clickable QR link (opens in the user's browser when clicked).
-                Component qrComponent = Component.text("QR Code: ")
-                    .color(NamedTextColor.AQUA)
-                    .append(Component.text("Click here")
+                // Convert the otpauth URI to an HTTPS QR image URL so clicking opens in a browser.
+                try {
+                    String qrImageUrl = "https://api.qrserver.com/v1/create-qr-code/?data=" +
+                        java.net.URLEncoder.encode(qrUrl, "UTF-8") + "&size=300x300";
+
+                    Component qrComponent = Component.text("QR Code: ")
                         .color(NamedTextColor.AQUA)
-                        .clickEvent(ClickEvent.openUrl(qrUrl)));
-                player.sendMessage(qrComponent);
+                        .append(Component.text("Click here")
+                            .color(NamedTextColor.AQUA)
+                            .clickEvent(ClickEvent.openUrl(qrImageUrl)));
+                    player.sendMessage(qrComponent);
+                } catch (Exception e) {
+                    // Fallback: send the raw otpauth URI as plain text (manual entry still possible)
+                    player.sendMessage(Component.text("QR: " + qrUrl)
+                        .color(NamedTextColor.AQUA));
+                }
 
                 player.sendMessage(Component.text("3. After setup, use /2fa <code> to verify and complete setup")
                     .color(NamedTextColor.YELLOW));
