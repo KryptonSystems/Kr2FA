@@ -139,8 +139,10 @@ public class Velocity2FA {
             if (isStaff && has2FA && !isAuthenticated) {
                 String command = event.getCommand().toLowerCase();
                 
-                // Allow only /2fa commands for authentication
-                if (!command.startsWith("2fa")) {
+                // Allow only /2fa commands for authentication (exact match or with arguments)
+                boolean isAllowedCommand = command.equals("2fa") || command.startsWith("2fa ");
+                
+                if (!isAllowedCommand) {
                     event.setResult(CommandExecuteEvent.CommandResult.denied());
                     try {
                         player.sendMessage(Component.text("You must authenticate with 2FA first! Use /2fa <code>")
@@ -153,8 +155,9 @@ public class Velocity2FA {
                 }
             }
         } catch (Exception e) {
-            logger.error("Error in CommandExecute event for player {}: {}", player.getUsername(), e.getMessage(), e);
-            // Don't block the command if there's an error in our plugin
+            // Fail securely: block the command when errors occur to prevent security bypass
+            event.setResult(CommandExecuteEvent.CommandResult.denied());
+            logger.error("Error in CommandExecute event for player {}, blocking command for security: {}", player.getUsername(), e.getMessage(), e);
         }
     }
 
