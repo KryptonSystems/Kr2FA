@@ -1,8 +1,8 @@
 <p align="center">
 	<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KICAgIDxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgODAwIDIwMCI+CiAgICAgICAgPGRlZnM+CiAgICAgICAgICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmctZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzQxNThEMDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojQzg1MEMwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZDQzcwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgICAgICAgICA8ZmlsdGVyIGlkPSJzaGFkb3ciPgogICAgICAgICAgICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjQiIHN0ZERldmlhdGlvbj0iNCIgZmxvb2Qtb3BhY2l0eT0iMC4yNSIgLz4KICAgICAgICAgICAgPC9maWx0ZXI+CiAgICAgICAgPC9kZWZzPgogICAgICAgIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2JnLWdyYWRpZW50KSIgcng9IjE1IiByeT0iMTUiLz4KICAgICAgICA8dGV4dCB4PSI0MDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IgogICAgICAgIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIgogICAgICAgIGZpbGw9IiNGRkZGRkYiIGZpbHRlcj0idXJsKCNzaGFkb3cpIj5LUjJGQTwvdGV4dD4KICAgIDwvc3ZnPg==" alt="kr2fa-banner" width="800">
-</p>
+	
 <p align="left">
-	<em><code>❯ A lightweight staff-only 2FA plugin for Velocity 3 (MC 1.21.x). Premium-only (online-mode) friendly.</code></em>
+	<em><code>A lightweight staff-only 2FA plugin for Velocity 3 (MC 1.21.x). Premium-only (online-mode) friendly.</code></em>
 </p>
 <p align="left">
 	<!-- Shields.io badges disabled, using skill icons. --></p>
@@ -33,7 +33,7 @@
 
 ##  Overview
 
-Kr2FA (Velocity2FA) is a Two-Factor Authentication plugin designed specifically for Minecraft Velocity proxy servers. It provides an additional layer of security for staff members by requiring TOTP-based authentication (compatible with Google Authenticator/Authy) before granting access to backend servers. The plugin blocks staff from connecting to game servers or executing commands until they complete 2FA verification, ensuring unauthorized access is prevented even if credentials are compromised.
+Kr2FA (Velocity2FA) is a Two-Factor Authentication plugin explicitly designed for Minecraft Velocity proxy servers. It provides an additional layer of security for staff members by requiring TOTP-based authentication (compatible with Google Authenticator/Authy) before granting access to backend servers. The plugin blocks staff from connecting to game servers or executing commands until they complete 2FA verification, preventing unauthorized access even if credentials are compromised.
 
 ---
 
