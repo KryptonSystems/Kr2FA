@@ -6,7 +6,7 @@
 
     <groupId>com.queazified</groupId>
     <artifactId>velocity-2fa</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.54</version>
     <packaging>jar</packaging>
 
     <name>Velocity2FA</name>
