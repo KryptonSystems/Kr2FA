@@ -2,6 +2,7 @@ package com.queazified.velocity2fa;
 import java.util.Map;
 
 import com.google.inject.Inject;
+import com.velocitypowered.api.event.PostOrder;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.command.CommandExecuteEvent;
 import com.velocitypowered.api.event.connection.PostLoginEvent;
@@ -91,14 +92,14 @@ public class Velocity2FA {
         }
     }
 
-    @Subscribe
+    @Subscribe(order = PostOrder.FIRST)
     public void onServerPreConnect(ServerPreConnectEvent event) {
         Player player = event.getPlayer();
         try {
             String limboServer = configManager.getConfig().limboServer;
             boolean isStaff = hasStaffPermission(player);
             boolean has2FA = twoFactorManager.hasSecretKey(player.getUniqueId());
-            boolean isAuthenticated = authenticatedPlayers.containsKey(player.getUsername());
+            boolean isAuthenticated = isPlayerAuthenticated(player.getUsername());
             String targetServer = event.getOriginalServer().getServerInfo().getName();
 
             // If staff, has 2FA, and not authenticated
@@ -118,11 +119,12 @@ public class Velocity2FA {
             }
         } catch (Exception e) {
             logger.error("Error in ServerPreConnect event for player {}: {}", player.getUsername(), e.getMessage(), e);
-            // Don't block the connection if there's an error in our plugin
+            // Fail securely: block the connection when errors occur to prevent security bypass
+            event.setResult(ServerPreConnectEvent.ServerResult.denied());
         }
     }
 
-    @Subscribe
+    @Subscribe(order = PostOrder.FIRST)
     public void onCommandExecute(CommandExecuteEvent event) {
         if (!(event.getCommandSource() instanceof Player)) {
             return;
@@ -133,7 +135,7 @@ public class Velocity2FA {
         try {
             boolean isStaff = hasStaffPermission(player);
             boolean has2FA = twoFactorManager.hasSecretKey(player.getUniqueId());
-            boolean isAuthenticated = authenticatedPlayers.containsKey(player.getUsername());
+            boolean isAuthenticated = isPlayerAuthenticated(player.getUsername());
 
             // If staff, has 2FA, and not authenticated, block commands except /2fa
             if (isStaff && has2FA && !isAuthenticated) {
@@ -168,6 +170,24 @@ public class Velocity2FA {
                player.hasPermission("admin") ||
                player.hasPermission("helper") ||
                player.hasPermission("velocity2fa.staff");
+    }
+
+    /**
+     * Check if a player is authenticated and their session hasn't expired.
+     * @param username The player's username
+     * @return true if authenticated and session is valid, false otherwise
+     */
+    private boolean isPlayerAuthenticated(String username) {
+        Long expiry = authenticatedPlayers.get(username);
+        if (expiry == null) {
+            return false;
+        }
+        if (expiry <= System.currentTimeMillis()) {
+            // Session expired, remove from cache
+            authenticatedPlayers.remove(username);
+            return false;
+        }
+        return true;
     }
 
     // Getters for other classes
