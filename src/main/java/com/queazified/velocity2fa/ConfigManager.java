@@ -87,13 +87,13 @@ public class ConfigManager {
      * Configuration class
      */
     public static class Config {
-    public String serverName = "PROXY-01";
-    public String limboServer = "limbo"; // Server name for unauthenticated staff
+    public String serverName = "Proxy-01";
+    public String limboServer = "Hub"; // Server name for unauthenticated staff
         public String issuerName = "Velocity2FA";
         public boolean enforceFor2FA = true;
         public boolean requireCodeOnJoin = true;
         public List<String> staffPermissions = Arrays.asList(
-            "staff", "moderator", "admin", "helper", "velocity2fa.staff"
+            "velocity2fa.staff"
         );
         public int codeWindow = 3; // Number of 30-second windows to allow
         public boolean logAuthAttempts = true;

@@ -24,7 +24,7 @@ public class TwoFactorCommand implements SimpleCommand {
         String[] args = invocation.arguments();
 
         if (!(source instanceof Player)) {
-            source.sendMessage(Component.text("Only players can use this command!")
+            source.sendMessage(Component.text("Only players can use this command.")
                 .color(NamedTextColor.RED));
             return;
         }
@@ -63,7 +63,7 @@ public class TwoFactorCommand implements SimpleCommand {
     }
 
     private void showHelp(Player player) {
-        player.sendMessage(Component.text("=== Velocity2FA Commands ===")
+        player.sendMessage(Component.text("---------- 2FA Commands ----------")
             .color(NamedTextColor.GOLD));
         player.sendMessage(Component.text("/2fa setup - Set up 2FA for your account")
             .color(NamedTextColor.YELLOW));
@@ -75,6 +75,8 @@ public class TwoFactorCommand implements SimpleCommand {
             .color(NamedTextColor.YELLOW));
         player.sendMessage(Component.text("/2fa status - Check your 2FA status")
             .color(NamedTextColor.YELLOW));
+        player.sendMessage(Component.text("----------    Kr2FA     ----------")
+            .color(NamedTextColor.GOLD));
     }
 
     private void setupTwoFactor(Player player) {
@@ -104,22 +106,26 @@ public class TwoFactorCommand implements SimpleCommand {
 
         if (player.isActive()) {
             try {
-                player.sendMessage(Component.text("=== 2FA Setup ===")
+                player.sendMessage(Component.text("---------- 2FA Setup ----------")
                     .color(NamedTextColor.GOLD));
-                Thread.sleep(100);
+
                 player.sendMessage(Component.text("1. Install an authenticator app (Google Authenticator, Microsoft Authenticator, etc.)")
                     .color(NamedTextColor.YELLOW));
-                Thread.sleep(100);
+
                 player.sendMessage(Component.text("2. Enter the secret manually into your Authenticator:")
                     .color(NamedTextColor.YELLOW));
-                Thread.sleep(100);
+
                 player.sendMessage(Component.text("Secret Key: " + secretKey)
                     .color(NamedTextColor.GREEN));
-                Thread.sleep(100);
-                //player.sendMessage(Component.text("QR Code: Click here to open")
-                //    .color(NamedTextColor.AQUA)
-                //    .clickEvent(ClickEvent.openUrl(qrUrl)));
-                Thread.sleep(100);
+
+                // Send a clickable QR link (opens in the user's browser when clicked).
+                Component qrComponent = Component.text("QR Code: ")
+                    .color(NamedTextColor.AQUA)
+                    .append(Component.text("Click here")
+                        .color(NamedTextColor.AQUA)
+                        .clickEvent(ClickEvent.openUrl(qrUrl)));
+                player.sendMessage(qrComponent);
+
                 player.sendMessage(Component.text("3. After setup, use /2fa <code> to verify and complete setup")
                     .color(NamedTextColor.YELLOW));
             } catch (Exception e) {

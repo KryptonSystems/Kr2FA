@@ -1,10 +1,10 @@
 {
-  "serverName": "YourServer",
-  "limboServer": "limbo",
+  "serverName": "Proxy-01",
+  "limboServer": "Hub",
   "issuerName": "Velocity2FA",
   "enforceFor2FA": true,
   "requireCodeOnJoin": true,
-  "staffPermissions": ["staff", "moderator", "admin", "helper", "velocity2fa.staff"],
+  "staffPermissions": ["velocity2fa.staff"],
   "codeWindow": 3,
   "logAuthAttempts": true,
   "kickOnFailedAuth": false,

@@ -165,11 +165,7 @@ public class Velocity2FA {
 
     private boolean hasStaffPermission(Player player) {
         // Check for any staff permission - you can customize this logic
-        return player.hasPermission("staff") || 
-               player.hasPermission("moderator") || 
-               player.hasPermission("admin") ||
-               player.hasPermission("helper") ||
-               player.hasPermission("velocity2fa.staff");
+        return player.hasPermission("velocity2fa.staff");
     }
 
     /**
