@@ -249,7 +249,7 @@ public class AdminCommand implements SimpleCommand {
             .filter(this::hasStaffPermission)
             .count();
 
-        plugin.sendPrefixed(source, Component.text("=== Velocity2FA Statistics ===")
+        plugin.sendPrefixed(source, Component.text("=== Kr2FA Statistics ===")
             .color(NamedTextColor.GOLD));
         plugin.sendPrefixed(source, Component.text("Total 2FA Enabled: " + totalEnabled)
             .color(NamedTextColor.YELLOW));
