@@ -191,9 +191,9 @@ public class TwoFactorCommand implements SimpleCommand {
 
         plugin.sendPrefixed(player, Component.text("=== Your 2FA Status ===")
             .color(NamedTextColor.GOLD));
-        player.sendMessage(Component.text("2FA Enabled: " + (has2FA ? "✓ Yes" : "✗ No"))
+        plugin.sendPrefixed(player, Component.text("2FA Enabled: " + (has2FA ? "✓ Yes" : "✗ No"))
             .color(has2FA ? NamedTextColor.GREEN : NamedTextColor.RED));
-        player.sendMessage(Component.text("Staff Permission: " + (hasStaffPermission(player) ? "✓ Yes" : "✗ No"))
+        plugin.sendPrefixed(player, Component.text("Staff Permission: " + (hasStaffPermission(player) ? "✓ Yes" : "✗ No"))
             .color(hasStaffPermission(player) ? NamedTextColor.GREEN : NamedTextColor.RED));
         
         if (has2FA) {
