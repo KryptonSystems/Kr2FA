@@ -24,7 +24,7 @@ public class TwoFactorCommand implements SimpleCommand {
         String[] args = invocation.arguments();
 
         if (!(source instanceof Player)) {
-            source.sendMessage(Component.text("Only players can use this command.")
+            plugin.sendPrefixed(source, Component.text("Only players can use this command.")
                 .color(NamedTextColor.RED));
             return;
         }
@@ -43,7 +43,7 @@ public class TwoFactorCommand implements SimpleCommand {
             case "verify":
             case "auth":
                 if (args.length < 2) {
-                    player.sendMessage(Component.text("Usage: /2fa verify <code>")
+                    plugin.sendPrefixed(player, Component.text("Usage: /2fa verify <code>")
                         .color(NamedTextColor.RED));
                     return;
                 }
@@ -63,19 +63,19 @@ public class TwoFactorCommand implements SimpleCommand {
     }
 
     private void showHelp(Player player) {
-        player.sendMessage(Component.text("---------- 2FA Commands ----------")
+        plugin.sendPrefixed(player, Component.text("---------- 2FA Commands ----------")
             .color(NamedTextColor.GOLD));
-        player.sendMessage(Component.text("/2fa setup - Set up 2FA for your account")
+        plugin.sendPrefixed(player, Component.text("/2fa setup - Set up 2FA for your account")
             .color(NamedTextColor.YELLOW));
-        player.sendMessage(Component.text("/2fa <code> - Verify your 2FA code")
+        plugin.sendPrefixed(player, Component.text("/2fa <code> - Verify your 2FA code")
             .color(NamedTextColor.YELLOW));
-        player.sendMessage(Component.text("/2fa verify <code> - Verify your 2FA code")
+        plugin.sendPrefixed(player, Component.text("/2fa verify <code> - Verify your 2FA code")
             .color(NamedTextColor.YELLOW));
-        player.sendMessage(Component.text("/2fa disable - Disable 2FA (requires current code)")
+        plugin.sendPrefixed(player, Component.text("/2fa disable - Disable 2FA (requires current code)")
             .color(NamedTextColor.YELLOW));
-        player.sendMessage(Component.text("/2fa status - Check your 2FA status")
+        plugin.sendPrefixed(player, Component.text("/2fa status - Check your 2FA status")
             .color(NamedTextColor.YELLOW));
-        player.sendMessage(Component.text("----------    Kr2FA     ----------")
+        plugin.sendPrefixed(player, Component.text("----------    Kr2FA     ----------")
             .color(NamedTextColor.GOLD));
     }
 
@@ -83,7 +83,7 @@ public class TwoFactorCommand implements SimpleCommand {
         // Check if player has staff permission
         if (!hasStaffPermission(player)) {
             try {
-                player.sendMessage(Component.text("You don't have permission to use 2FA!")
+                plugin.sendPrefixed(player, Component.text("You don't have permission to use 2FA!")
                     .color(NamedTextColor.RED));
             } catch (Exception e) {
                 // Ignore system chat errors
@@ -93,7 +93,7 @@ public class TwoFactorCommand implements SimpleCommand {
 
         if (plugin.getTwoFactorManager().hasSecretKey(player.getUniqueId())) {
             try {
-                player.sendMessage(Component.text("You already have 2FA enabled! Use /2fa disable to remove it.")
+                plugin.sendPrefixed(player, Component.text("You already have 2FA enabled! Use /2fa disable to remove it.")
                     .color(NamedTextColor.RED));
             } catch (Exception e) {
                 // Ignore system chat errors
@@ -106,16 +106,16 @@ public class TwoFactorCommand implements SimpleCommand {
 
         if (player.isActive()) {
             try {
-                player.sendMessage(Component.text("---------- 2FA Setup ----------")
+                plugin.sendPrefixed(player, Component.text("---------- 2FA Setup ----------")
                     .color(NamedTextColor.GOLD));
 
-                player.sendMessage(Component.text("1. Install an authenticator app (Google Authenticator, Microsoft Authenticator, etc.)")
+                plugin.sendPrefixed(player, Component.text("1. Install an authenticator app (Google Authenticator, Microsoft Authenticator, etc.)")
                     .color(NamedTextColor.YELLOW));
 
-                player.sendMessage(Component.text("2. Enter the secret manually into your Authenticator:")
+                plugin.sendPrefixed(player, Component.text("2. Enter the secret manually into your Authenticator:")
                     .color(NamedTextColor.YELLOW));
 
-                player.sendMessage(Component.text("Secret Key: " + secretKey)
+                plugin.sendPrefixed(player, Component.text("Secret Key: " + secretKey)
                     .color(NamedTextColor.GREEN));
 
                 // Convert the otpauth URI to an HTTPS QR image URL so clicking opens in a browser.
@@ -128,14 +128,14 @@ public class TwoFactorCommand implements SimpleCommand {
                         .append(Component.text("Click here")
                             .color(NamedTextColor.AQUA)
                             .clickEvent(ClickEvent.openUrl(qrImageUrl)));
-                    player.sendMessage(qrComponent);
+                    plugin.sendPrefixed(player, qrComponent);
                 } catch (Exception e) {
                     // Fallback: send the raw otpauth URI as plain text (manual entry still possible)
-                    player.sendMessage(Component.text("QR: " + qrUrl)
+                    plugin.sendPrefixed(player, Component.text("QR: " + qrUrl)
                         .color(NamedTextColor.AQUA));
                 }
 
-                player.sendMessage(Component.text("3. After setup, use /2fa <code> to verify and complete setup")
+                plugin.sendPrefixed(player, Component.text("3. After setup, use /2fa <code> to verify and complete setup")
                     .color(NamedTextColor.YELLOW));
             } catch (Exception e) {
                 // Ignore system chat errors
@@ -145,7 +145,7 @@ public class TwoFactorCommand implements SimpleCommand {
 
     private void verifyCode(Player player, String code) {
         if (!plugin.getTwoFactorManager().hasSecretKey(player.getUniqueId())) {
-            player.sendMessage(Component.text("You don't have 2FA set up! Use /2fa setup first.")
+            plugin.sendPrefixed(player, Component.text("You don't have 2FA set up! Use /2fa setup first.")
                 .color(NamedTextColor.RED));
             return;
         }
@@ -158,12 +158,12 @@ public class TwoFactorCommand implements SimpleCommand {
             plugin.getAuthenticatedPlayers().put(player.getUsername(), expiry);
             plugin.getPendingAuthentication().remove(player.getUsername());
             
-            player.sendMessage(Component.text("2FA verification successful! You can now access servers.")
+            plugin.sendPrefixed(player, Component.text("2FA verification successful! You can now access servers.")
                 .color(NamedTextColor.GREEN));
             
             plugin.getLogger().info("Player {} successfully authenticated with 2FA", player.getUsername());
         } else {
-            player.sendMessage(Component.text("Invalid 2FA code! Please try again.")
+            plugin.sendPrefixed(player, Component.text("Invalid 2FA code! Please try again.")
                 .color(NamedTextColor.RED));
             
             plugin.getLogger().warn("Player {} failed 2FA authentication", player.getUsername());
@@ -177,9 +177,9 @@ public class TwoFactorCommand implements SimpleCommand {
             return;
         }
 
-        player.sendMessage(Component.text("To disable 2FA, please provide your current 2FA code:")
+        plugin.sendPrefixed(player, Component.text("To disable 2FA, please provide your current 2FA code:")
             .color(NamedTextColor.YELLOW));
-        player.sendMessage(Component.text("Use: /2fa-admin disable " + player.getUsername() + " <code>")
+        plugin.sendPrefixed(player, Component.text("Use: /2fa-admin disable " + player.getUsername() + " <code>")
             .color(NamedTextColor.YELLOW));
     }
 
@@ -189,7 +189,7 @@ public class TwoFactorCommand implements SimpleCommand {
         boolean isAuthenticated = expiry != null && expiry > System.currentTimeMillis();
         boolean isPending = plugin.getPendingAuthentication().contains(player.getUsername());
 
-        player.sendMessage(Component.text("=== Your 2FA Status ===")
+        plugin.sendPrefixed(player, Component.text("=== Your 2FA Status ===")
             .color(NamedTextColor.GOLD));
         player.sendMessage(Component.text("2FA Enabled: " + (has2FA ? "✓ Yes" : "✗ No"))
             .color(has2FA ? NamedTextColor.GREEN : NamedTextColor.RED));
@@ -197,13 +197,13 @@ public class TwoFactorCommand implements SimpleCommand {
             .color(hasStaffPermission(player) ? NamedTextColor.GREEN : NamedTextColor.RED));
         
         if (has2FA) {
-            player.sendMessage(Component.text("Authenticated This Session: " + (isAuthenticated ? "✓ Yes" : "✗ No"))
+            plugin.sendPrefixed(player, Component.text("Authenticated This Session: " + (isAuthenticated ? "✓ Yes" : "✗ No"))
                 .color(isAuthenticated ? NamedTextColor.GREEN : NamedTextColor.RED));
-            player.sendMessage(Component.text("Pending Authentication: " + (isPending ? "⚠ Yes" : "✓ No"))
+            plugin.sendPrefixed(player, Component.text("Pending Authentication: " + (isPending ? "⚠ Yes" : "✓ No"))
                 .color(isPending ? NamedTextColor.YELLOW : NamedTextColor.GREEN));
             if (isAuthenticated && expiry != null) {
                 long minsLeft = (expiry - System.currentTimeMillis()) / 60000L;
-                player.sendMessage(Component.text("Session expires in: " + minsLeft + " min")
+                plugin.sendPrefixed(player, Component.text("Session expires in: " + minsLeft + " min")
                     .color(NamedTextColor.AQUA));
             }
         }

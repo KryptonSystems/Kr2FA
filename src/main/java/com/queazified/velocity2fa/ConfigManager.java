@@ -89,7 +89,8 @@ public class ConfigManager {
     public static class Config {
     public String serverName = "Proxy-01";
     public String limboServer = "Hub"; // Server name for unauthenticated staff
-        public String issuerName = "Velocity2FA";
+        public String messagePrefix = "[Kr2FA]";
+        public String issuerName = "Kr2FA";
         public boolean enforceFor2FA = true;
         public boolean requireCodeOnJoin = true;
         public List<String> staffPermissions = Arrays.asList(

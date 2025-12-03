@@ -1,7 +1,8 @@
 {
   "serverName": "Proxy-01",
   "limboServer": "Hub",
-  "issuerName": "Velocity2FA",
+  "messagePrefix": "[Kr2FA]",
+  "issuerName": "Kr2FA",
   "enforceFor2FA": true,
   "requireCodeOnJoin": true,
   "staffPermissions": ["velocity2fa.staff"],
