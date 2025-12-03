@@ -6,7 +6,7 @@
 
     <groupId>com.queazified</groupId>
     <artifactId>kr2fa</artifactId>
-    <version>1.0.56</version>
+    <version>1.0.57</version>
     <packaging>jar</packaging>
 
     <name>Kr2FA</name>
