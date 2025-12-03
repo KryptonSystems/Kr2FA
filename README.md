@@ -281,7 +281,7 @@ Example snippet:
 	"serverName": "Proxy-01",
 	"limboServer": "Hub",
 	"messagePrefix": "[Kr2FA]",
-	"issuerName": "Velocity2FA"
+	"issuerName": "Kr2FA"
 }
 ```
 
