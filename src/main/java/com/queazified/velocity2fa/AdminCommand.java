@@ -77,7 +77,7 @@ public class AdminCommand implements SimpleCommand {
     }
 
     private void showAdminHelp(CommandSource source) {
-        plugin.sendPrefixed(source, Component.text("=== Velocity2FA Admin Commands ===")
+        plugin.sendPrefixed(source, Component.text("=== Kr2FA Admin Commands ===")
             .color(NamedTextColor.GOLD));
         plugin.sendPrefixed(source, Component.text("/2fa-admin disable <player> [code] - Disable player's 2FA (with verification)")
             .color(NamedTextColor.YELLOW));
