@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KICAgIDxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgODAwIDIwMCI+CiAgICAgICAgPGRlZnM+CiAgICAgICAgICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmctZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzQxNThEMDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojQzg1MEMwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZDQzcwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgICAgICAgICA8ZmlsdGVyIGlkPSJzaGFkb3ciPgogICAgICAgICAgICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjQiIHN0ZERldmlhdGlvbj0iNCIgZmxvb2Qtb3BhY2l0eT0iMC4yNSIgLz4KICAgICAgICAgICAgPC9maWx0ZXI+CiAgICAgICAgPC9kZWZzPgogICAgICAgIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2JnLWdyYWRpZW50KSIgcng9IjE1IiByeT0iMTUiLz4KICAgICAgICA8dGV4dCB4PSI0MDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IgogICAgICAgIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIgogICAgICAgIGZpbGw9IiNGRkZGRkYiIGZpbHRlcj0idXJsKCNzaGFkb3cpIj5LUjJGQTwvdGV4dD4KICAgIDwvc3ZnPg==" alt="kr2fa-banner" width="800">
+	<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KICAgIDxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgODAwIDIwMCI+CiAgICAgICAgPGRlZnM+CiAgICAgICAgICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmctZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzQxNThEMDtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iNTAlIiBzdHlsZT0ic3RvcC1jb2xvcjojQzg1MEMwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkZDQzcwO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICAgICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgICAgICAgICA8ZmlsdGVyIGlkPSJzaGFkb3ciPgogICAgICAgICAgICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjQiIHN0ZERldmlhdGlvbj0iNCIgZmxvb2Qtb3BhY2l0eT0iMC4yNSIgLz4KICAgICAgICAgICAgPC9maWx0ZXI+CiAgICAgICAgPC9kZWZzPgogICAgICAgIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2JnLWdyYWRpZW50KSIgcng9IjE1IiByeT0iMTUiLz4KICAgICAgICA8dGV4dCB4PSI0MDAiIHk9IjEwMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IgogICAgICAgIGZvbnQtd2VpZ2h0PSJib2xkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIgogICAgICAgIGZpbGw9IiNGRkZGRkYiIGZpbHRlcj0idXJsKCNzaGFkb3cpIj5LUjJGQTwvdGV4dD4KICAgIDwvc3ZnPg==" alt="kr2fa-banner" width="800"></p>
 	
 <p align="left">
 	<em><code>A lightweight staff-only 2FA plugin for Velocity 3 (MC 1.21.x). Premium-only (online-mode) friendly.</code></em>
@@ -33,7 +33,7 @@
 
 ##  Overview
 
-Kr2FA (Velocity2FA) is a Two-Factor Authentication plugin explicitly designed for Minecraft Velocity proxy servers. It provides an additional layer of security for staff members by requiring TOTP-based authentication (compatible with Google Authenticator/Authy) before granting access to backend servers. The plugin blocks staff from connecting to game servers or executing commands until they complete 2FA verification, preventing unauthorized access even if credentials are compromised.
+Kr2FA is a Two-Factor Authentication plugin explicitly designed for Minecraft Velocity proxy servers. It provides an additional layer of security for staff members by requiring TOTP-based authentication (compatible with Google Authenticator/Authy) before granting access to backend servers. The plugin blocks staff from connecting to game servers or executing commands until they complete 2FA verification, preventing unauthorized access even if credentials are compromised.
 
 ---
 
@@ -43,10 +43,12 @@ Kr2FA (Velocity2FA) is a Two-Factor Authentication plugin explicitly designed fo
 - **TOTP Authentication**: Uses industry-standard Time-based One-Time Passwords compatible with Google Authenticator, Authy, and similar apps
 - **Server Connection Blocking**: Blocks staff from joining backend servers until 2FA verification is complete
 - **Command Restriction**: Blocks all commands (except `/2fa`) until authentication is successful
-- **Persistent Secrets**: Securely stores TOTP secrets in `plugins/Velocity2FA/secrets.json`
+- **Persistent Secrets**: Securely stores TOTP secrets in `plugins/Kr2FA/secrets.json`
 - **Session Cache**: Configurable session duration to avoid re-verifying too often (default 12h)
 - **Admin Management**: Dedicated admin command (`/2fa-admin`) for managing staff 2FA settings
 - **Limbo Server Support**: Allows players to connect to a designated limbo/lobby server while pending authentication
+
+- **Configurable Message Prefix**: Prepend a custom, editable prefix to all plugin messages for clear branding
 
 ---
 
@@ -215,7 +217,7 @@ Kr2FA (Velocity2FA) is a Two-Factor Authentication plugin explicitly designed fo
 
 Before getting started with Kr2FA, ensure your runtime environment meets the following requirements:
 
-- **Programming Language:** Java 21 or higher
+- **Programming Language:** Java 21 or higher (build may require matching JDK)
 - **Build Tool:** Maven 3.6+
 - **Server:** Velocity 3.1.1+ proxy server
 
@@ -243,7 +245,7 @@ Install Kr2FA using one of the following methods:
 
 4. Copy the generated JAR to your Velocity plugins folder:
 ```sh
-❯ cp target/Velocity2FA-*.jar /path/to/velocity/plugins/
+❯ cp target/Kr2FA-*.jar /path/to/velocity/plugins/
 ```
 
 
@@ -252,11 +254,6 @@ Install Kr2FA using one of the following methods:
 2. Grant staff members the appropriate permission (any of the following will work):
    ```sh
    /lp group staff permission set staff true
-   # OR use any of these alternatives:
-   # /lp group staff permission set moderator true
-   # /lp group staff permission set admin true
-   # /lp group staff permission set helper true
-   # /lp group staff permission set velocity2fa.staff true
    ```
 3. When staff members first join, they'll be prompted to set up 2FA:
    ```sh
@@ -266,6 +263,22 @@ Install Kr2FA using one of the following methods:
    ```sh
    /2fa <6-digit-code>
    ```
+
+### Configuration
+
+Edit `plugins/Velocity2FA/config.json` after first run. New option:
+
+- `messagePrefix`: A short tag prepended to all player/console messages sent by the plugin. Default: `[Kr2FA]`.
+
+Example snippet:
+```json
+{
+	"serverName": "Proxy-01",
+	"limboServer": "Hub",
+	"messagePrefix": "[Kr2FA]",
+	"issuerName": "Kr2FA"
+}
+```
 
 ###  Testing
 Run the test suite using the following command:

@@ -26,7 +26,7 @@ public class AdminCommand implements SimpleCommand {
         String[] args = invocation.arguments();
 
         if (!source.hasPermission("velocity2fa.admin")) {
-            source.sendMessage(Component.text("No permission.")
+            plugin.sendPrefixed(source, Component.text("No permission.")
                 .color(NamedTextColor.RED));
             return;
         }
@@ -39,7 +39,7 @@ public class AdminCommand implements SimpleCommand {
         switch (args[0].toLowerCase()) {
             case "disable":
                 if (args.length < 2) {
-                    source.sendMessage(Component.text("Usage: /2fa-admin disable <player> [code]")
+                    plugin.sendPrefixed(source, Component.text("Usage: /2fa-admin disable <player> [code]")
                         .color(NamedTextColor.RED));
                     return;
                 }
@@ -47,7 +47,7 @@ public class AdminCommand implements SimpleCommand {
                 break;
             case "force-disable":
                 if (args.length < 2) {
-                    source.sendMessage(Component.text("Usage: /2fa-admin force-disable <player>")
+                    plugin.sendPrefixed(source, Component.text("Usage: /2fa-admin force-disable <player>")
                         .color(NamedTextColor.RED));
                     return;
                 }
@@ -55,7 +55,7 @@ public class AdminCommand implements SimpleCommand {
                 break;
             case "status":
                 if (args.length < 2) {
-                    source.sendMessage(Component.text("Usage: /2fa-admin status <player>")
+                    plugin.sendPrefixed(source, Component.text("Usage: /2fa-admin status <player>")
                         .color(NamedTextColor.RED));
                     return;
                 }
@@ -77,28 +77,28 @@ public class AdminCommand implements SimpleCommand {
     }
 
     private void showAdminHelp(CommandSource source) {
-        source.sendMessage(Component.text("=== Velocity2FA Admin Commands ===")
+        plugin.sendPrefixed(source, Component.text("=== Kr2FA Admin Commands ===")
             .color(NamedTextColor.GOLD));
-        source.sendMessage(Component.text("/2fa-admin disable <player> [code] - Disable player's 2FA (with verification)")
+        plugin.sendPrefixed(source, Component.text("/2fa-admin disable <player> [code] - Disable player's 2FA (with verification)")
             .color(NamedTextColor.YELLOW));
-        source.sendMessage(Component.text("/2fa-admin force-disable <player> - Force disable without verification")
+        plugin.sendPrefixed(source, Component.text("/2fa-admin force-disable <player> - Force disable without verification")
             .color(NamedTextColor.YELLOW));
-        source.sendMessage(Component.text("/2fa-admin status <player> - Check player's 2FA status")
+        plugin.sendPrefixed(source, Component.text("/2fa-admin status <player> - Check player's 2FA status")
             .color(NamedTextColor.YELLOW));
-        source.sendMessage(Component.text("/2fa-admin list - List all players with 2FA enabled")
+        plugin.sendPrefixed(source, Component.text("/2fa-admin list - List all players with 2FA enabled")
             .color(NamedTextColor.YELLOW));
-        source.sendMessage(Component.text("/2fa-admin stats - Show 2FA usage statistics")
+        plugin.sendPrefixed(source, Component.text("/2fa-admin stats - Show 2FA usage statistics")
             .color(NamedTextColor.YELLOW));
-        source.sendMessage(Component.text("/2fa-admin reload - Reload plugin configuration")
+        plugin.sendPrefixed(source, Component.text("/2fa-admin reload - Reload plugin configuration")
             .color(NamedTextColor.YELLOW));
-        source.sendMessage(Component.text("==================================")
+        plugin.sendPrefixed(source, Component.text("==================================")
             .color(NamedTextColor.GOLD));
     }
 
     private void disablePlayerTwoFactor(CommandSource source, String playerName, String code) {
         Optional<Player> playerOpt = plugin.getServer().getPlayer(playerName);
         if (!playerOpt.isPresent()) {
-            source.sendMessage(Component.text("Player not found or not online!")
+            plugin.sendPrefixed(source, Component.text("Player not found or not online!")
                 .color(NamedTextColor.RED));
             return;
         }
@@ -107,7 +107,7 @@ public class AdminCommand implements SimpleCommand {
         UUID targetUuid = target.getUniqueId();
 
         if (!plugin.getTwoFactorManager().hasSecretKey(targetUuid)) {
-            source.sendMessage(Component.text("Player " + playerName + " doesn't have 2FA enabled!")
+            plugin.sendPrefixed(source, Component.text("Player " + playerName + " doesn't have 2FA enabled!")
                 .color(NamedTextColor.RED));
             return;
         }
@@ -116,7 +116,7 @@ public class AdminCommand implements SimpleCommand {
             // Verify the code before disabling
             boolean valid = plugin.getTwoFactorManager().verifyCode(targetUuid, code);
             if (!valid) {
-                source.sendMessage(Component.text("Invalid 2FA code! Cannot disable 2FA for " + playerName)
+                plugin.sendPrefixed(source, Component.text("Invalid 2FA code! Cannot disable 2FA for " + playerName)
                     .color(NamedTextColor.RED));
                 return;
             }
@@ -126,10 +126,10 @@ public class AdminCommand implements SimpleCommand {
         plugin.getAuthenticatedPlayers().remove(target.getUsername());
         plugin.getPendingAuthentication().remove(target.getUsername());
 
-        source.sendMessage(Component.text("Successfully disabled 2FA for " + playerName)
+        plugin.sendPrefixed(source, Component.text("Successfully disabled 2FA for " + playerName)
             .color(NamedTextColor.GREEN));
-        target.sendMessage(Component.text("Your 2FA has been disabled by an administrator.")
-            .color(NamedTextColor.YELLOW));
+        target.sendMessage(plugin.withPrefix(Component.text("Your 2FA has been disabled by an administrator.")
+            .color(NamedTextColor.YELLOW)));
 
         plugin.getLogger().info("Admin {} disabled 2FA for player {}", 
             source instanceof Player ? ((Player) source).getUsername() : "Console", playerName);
@@ -155,14 +155,14 @@ public class AdminCommand implements SimpleCommand {
                 }
             }
             if (targetUuid == null) {
-                source.sendMessage(Component.text("Player must be online for force-disable. Use regular disable with verification instead.")
+                plugin.sendPrefixed(source, Component.text("Player must be online for force-disable. Use regular disable with verification instead.")
                     .color(NamedTextColor.RED));
                 return;
             }
         }
 
         if (!plugin.getTwoFactorManager().hasSecretKey(targetUuid)) {
-            source.sendMessage(Component.text("Player " + targetName + " doesn't have 2FA enabled!")
+            plugin.sendPrefixed(source, Component.text("Player " + targetName + " doesn't have 2FA enabled!")
                 .color(NamedTextColor.RED));
             return;
         }
@@ -171,12 +171,12 @@ public class AdminCommand implements SimpleCommand {
         plugin.getAuthenticatedPlayers().remove(targetName);
         plugin.getPendingAuthentication().remove(targetName);
 
-        source.sendMessage(Component.text("Force-disabled 2FA for " + targetName + " (no verification required)")
+        plugin.sendPrefixed(source, Component.text("Force-disabled 2FA for " + targetName + " (no verification required)")
             .color(NamedTextColor.GREEN));
         
         if (playerOpt.isPresent()) {
-            playerOpt.get().sendMessage(Component.text("Your 2FA has been force-disabled by an administrator.")
-                .color(NamedTextColor.RED));
+            playerOpt.get().sendMessage(plugin.withPrefix(Component.text("Your 2FA has been force-disabled by an administrator.")
+                .color(NamedTextColor.RED)));
         }
 
         plugin.getLogger().warn("Admin {} force-disabled 2FA for player {} without verification", 
@@ -186,7 +186,7 @@ public class AdminCommand implements SimpleCommand {
     private void showPlayerStatus(CommandSource source, String playerName) {
         Optional<Player> playerOpt = plugin.getServer().getPlayer(playerName);
         if (!playerOpt.isPresent()) {
-            source.sendMessage(Component.text("Player not found or not online!")
+            plugin.sendPrefixed(source, Component.text("Player not found or not online!")
                 .color(NamedTextColor.RED));
             return;
         }
@@ -197,17 +197,17 @@ public class AdminCommand implements SimpleCommand {
         boolean isPending = plugin.getPendingAuthentication().contains(target.getUsername());
         boolean hasStaffPerm = hasStaffPermission(target);
 
-        source.sendMessage(Component.text("=== 2FA Status for " + playerName + " ===")
+        plugin.sendPrefixed(source, Component.text("=== 2FA Status for " + playerName + " ===")
             .color(NamedTextColor.GOLD));
-        source.sendMessage(Component.text("2FA Enabled: " + (has2FA ? "✓ Yes" : "✗ No"))
+        plugin.sendPrefixed(source, Component.text("2FA Enabled: " + (has2FA ? "✓ Yes" : "✗ No"))
             .color(has2FA ? NamedTextColor.GREEN : NamedTextColor.RED));
-        source.sendMessage(Component.text("Staff Permission: " + (hasStaffPerm ? "✓ Yes" : "✗ No"))
+        plugin.sendPrefixed(source, Component.text("Staff Permission: " + (hasStaffPerm ? "✓ Yes" : "✗ No"))
             .color(hasStaffPerm ? NamedTextColor.GREEN : NamedTextColor.RED));
         
         if (has2FA) {
-            source.sendMessage(Component.text("Authenticated This Session: " + (isAuthenticated ? "✓ Yes" : "✗ No"))
+            plugin.sendPrefixed(source, Component.text("Authenticated This Session: " + (isAuthenticated ? "✓ Yes" : "✗ No"))
                 .color(isAuthenticated ? NamedTextColor.GREEN : NamedTextColor.RED));
-            source.sendMessage(Component.text("Pending Authentication: " + (isPending ? "⚠ Yes" : "✓ No"))
+            plugin.sendPrefixed(source, Component.text("Pending Authentication: " + (isPending ? "⚠ Yes" : "✓ No"))
                 .color(isPending ? NamedTextColor.YELLOW : NamedTextColor.GREEN));
         }
     }
@@ -220,13 +220,13 @@ public class AdminCommand implements SimpleCommand {
 
         int totalUsers = plugin.getTwoFactorManager().getTotalEnabledUsers();
 
-        source.sendMessage(Component.text("=== Players with 2FA Enabled ===")
+        plugin.sendPrefixed(source, Component.text("=== Players with 2FA Enabled ===")
             .color(NamedTextColor.GOLD));
-        source.sendMessage(Component.text("Total: " + totalUsers + " | Online: " + onlineUsers.size())
+        plugin.sendPrefixed(source, Component.text("Total: " + totalUsers + " | Online: " + onlineUsers.size())
             .color(NamedTextColor.YELLOW));
 
         if (!onlineUsers.isEmpty()) {
-            source.sendMessage(Component.text("Online users with 2FA:")
+            plugin.sendPrefixed(source, Component.text("Online users with 2FA:")
                 .color(NamedTextColor.AQUA));
             for (String username : onlineUsers) {
                 Long expiry = plugin.getAuthenticatedPlayers().get(username);
@@ -234,7 +234,7 @@ public class AdminCommand implements SimpleCommand {
                 boolean pending = plugin.getPendingAuthentication().contains(username);
                 
                 String status = authenticated ? " §a✓" : (pending ? " §e⚠" : " §c✗");
-                source.sendMessage(Component.text("- " + username + status)
+                plugin.sendPrefixed(source, Component.text("- " + username + status)
                     .color(NamedTextColor.WHITE));
             }
         }
@@ -249,21 +249,21 @@ public class AdminCommand implements SimpleCommand {
             .filter(this::hasStaffPermission)
             .count();
 
-        source.sendMessage(Component.text("=== Velocity2FA Statistics ===")
+        plugin.sendPrefixed(source, Component.text("=== Kr2FA Statistics ===")
             .color(NamedTextColor.GOLD));
-        source.sendMessage(Component.text("Total 2FA Enabled: " + totalEnabled)
+        plugin.sendPrefixed(source, Component.text("Total 2FA Enabled: " + totalEnabled)
             .color(NamedTextColor.YELLOW));
-        source.sendMessage(Component.text("Currently Authenticated: " + currentlyAuthenticated)
+        plugin.sendPrefixed(source, Component.text("Currently Authenticated: " + currentlyAuthenticated)
             .color(NamedTextColor.GREEN));
-        source.sendMessage(Component.text("Pending Authentication: " + pendingAuth)
+        plugin.sendPrefixed(source, Component.text("Pending Authentication: " + pendingAuth)
             .color(NamedTextColor.YELLOW));
-        source.sendMessage(Component.text("Total Online Staff: " + totalOnlineStaff)
+        plugin.sendPrefixed(source, Component.text("Total Online Staff: " + totalOnlineStaff)
             .color(NamedTextColor.AQUA));
     }
 
     private void reloadPlugin(CommandSource source) {
         plugin.getConfigManager().reload();
-        source.sendMessage(Component.text("Velocity2FA configuration reloaded!")
+        plugin.sendPrefixed(source, Component.text("Velocity2FA configuration reloaded!")
             .color(NamedTextColor.GREEN));
     }
 
