@@ -245,7 +245,7 @@ Install Kr2FA using one of the following methods:
 
 4. Copy the generated JAR to your Velocity plugins folder:
 ```sh
-❯ cp target/Velocity2FA-*.jar /path/to/velocity/plugins/
+❯ cp target/Kr2FA-*.jar /path/to/velocity/plugins/
 ```
 
 
@@ -254,11 +254,6 @@ Install Kr2FA using one of the following methods:
 2. Grant staff members the appropriate permission (any of the following will work):
    ```sh
    /lp group staff permission set staff true
-   # OR use any of these alternatives:
-   # /lp group staff permission set moderator true
-   # /lp group staff permission set admin true
-   # /lp group staff permission set helper true
-   # /lp group staff permission set velocity2fa.staff true
    ```
 3. When staff members first join, they'll be prompted to set up 2FA:
    ```sh
