@@ -82,12 +82,12 @@ public class TwoFactorManager {
 
     public String generateQRUrl(String username, String secret) {
         try {
-            String issuer = "Velocity2FA";
+            String issuer = "Kr2FA";
             return "otpauth://totp/" + java.net.URLEncoder.encode(issuer + ":" + username, "UTF-8") + 
                    "?secret=" + secret + "&issuer=" + java.net.URLEncoder.encode(issuer, "UTF-8");
         } catch (Exception e) {
             logger.error("Failed to generate QR URL for {}: {}", username, e.getMessage());
-            return "otpauth://totp/Velocity2FA:" + username + "?secret=" + secret + "&issuer=Velocity2FA";
+            return "otpauth://totp/Kr2FA:" + username + "?secret=" + secret + "&issuer=Kr2FA";
         }
     }
 

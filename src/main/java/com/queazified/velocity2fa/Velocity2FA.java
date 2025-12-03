@@ -13,6 +13,7 @@ import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.command.CommandManager;
+import com.velocitypowered.api.command.CommandSource;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Plugin(
     id = "velocity2fa",
-    name = "Velocity2FA",
+    name = "Kr2FA",
     version = "1.0.0",
     description = "Two-Factor Authentication for staff members",
     authors = {"Queazified"}
@@ -75,11 +76,11 @@ public class Velocity2FA {
                 server.getScheduler().buildTask(this, () -> {
                     try {
                         if (player.isActive()) {
-                            player.sendMessage(Component.text("=== 2FA AUTHENTICATION REQUIRED ===")
+                            sendPrefixed(player, Component.text("=== 2FA AUTHENTICATION REQUIRED ===")
                                 .color(NamedTextColor.RED));
-                            player.sendMessage(Component.text("Please enter your 2FA code using: /2fa <code>")
+                            sendPrefixed(player, Component.text("Please enter your 2FA code using: /2fa <code>")
                                 .color(NamedTextColor.YELLOW));
-                            player.sendMessage(Component.text("You cannot join servers until authenticated.")
+                            sendPrefixed(player, Component.text("You cannot join servers until authenticated.")
                                 .color(NamedTextColor.RED));
                         }
                     } catch (Exception msgEx) {
@@ -107,9 +108,9 @@ public class Velocity2FA {
                 if (!targetServer.equalsIgnoreCase(limboServer)) {
                     event.setResult(ServerPreConnectEvent.ServerResult.denied());
                     try {
-                        player.sendMessage(Component.text("You must authenticate with 2FA first! Use /2fa <code>")
+                        sendPrefixed(player, Component.text("You must authenticate with 2FA first! Use /2fa <code>")
                             .color(NamedTextColor.RED));
-                        player.sendMessage(Component.text("You may only join the lobby/limbo server until authenticated.")
+                        sendPrefixed(player, Component.text("You may only join the lobby/limbo server until authenticated.")
                             .color(NamedTextColor.YELLOW));
                     } catch (Exception msgEx) {
                         logger.warn("Failed to send 2FA message to player {}: {}", player.getUsername(), msgEx.getMessage());
@@ -147,9 +148,9 @@ public class Velocity2FA {
                 if (!isAllowedCommand) {
                     event.setResult(CommandExecuteEvent.CommandResult.denied());
                     try {
-                        player.sendMessage(Component.text("You must authenticate with 2FA first! Use /2fa <code>")
+                        sendPrefixed(player, Component.text("You must authenticate with 2FA first! Use /2fa <code>")
                             .color(NamedTextColor.RED));
-                        player.sendMessage(Component.text("Commands are blocked until you complete 2FA authentication.")
+                        sendPrefixed(player, Component.text("Commands are blocked until you complete 2FA authentication.")
                             .color(NamedTextColor.YELLOW));
                     } catch (Exception msgEx) {
                         logger.warn("Failed to send 2FA command block message to player {}: {}", player.getUsername(), msgEx.getMessage());
@@ -194,4 +195,20 @@ public class Velocity2FA {
     public ConfigManager getConfigManager() { return configManager; }
     public Map<String, Long> getAuthenticatedPlayers() { return authenticatedPlayers; }
     public Set<String> getPendingAuthentication() { return pendingAuthentication; }
+
+    // Prefix helpers
+    private Component prefixComponent() {
+        String prefix = configManager != null && configManager.getConfig() != null
+            ? configManager.getConfig().messagePrefix
+            : "[Kr2FA]";
+        return Component.text(prefix).color(NamedTextColor.GRAY).append(Component.text(" "));
+    }
+
+    public Component withPrefix(Component message) {
+        return prefixComponent().append(message);
+    }
+
+    public void sendPrefixed(CommandSource target, Component message) {
+        target.sendMessage(withPrefix(message));
+    }
 }
