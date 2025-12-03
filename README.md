@@ -264,7 +264,7 @@ Install Kr2FA using one of the following methods:
    /2fa <6-digit-code>
    ```
 
-###  Configuration
+### Configuration
 
 Edit `plugins/Velocity2FA/config.json` after first run. New option:
 
